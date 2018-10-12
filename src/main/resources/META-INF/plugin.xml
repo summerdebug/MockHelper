@@ -1,0 +1,41 @@
+<idea-plugin>
+  <id>com.mockhelper</id>
+  <name>MockHelper</name>
+  <vendor email="summerdebug@gmail.com">Sergei</vendor>
+
+  <description><![CDATA[
+    Speed up unit tests development.
+    <ul>
+        <li>Automatically mock method while debugging.</li>
+        <li>Automatically mock static methods.</li>
+        <li>Automatically specify parameter values in tests.</li>
+        <li>Automatically reorder test fields and update fields visibility.</li>
+    </ul>
+    ]]>
+  </description>
+
+  <depends>com.intellij.modules.java</depends>
+
+  <actions>
+    <action id="com.mockhelper.action.MockMethod" class="com.mockhelper.action.MockMethod" text="com.mockhelper.action.MockMethod"
+      description="Mock non-static during debug session.">
+      <keyboard-shortcut first-keystroke="alt M" keymap="$default"/>
+    </action>
+    <action id="com.mockhelper.action.MockClassStatic" class="com.mockhelper.action.MockClassStatic" text="com.mockhelper.action.MockClassStatic"
+      description="Mock class statically using Power Mockito.">
+      <keyboard-shortcut first-keystroke="alt K" keymap="$default"/>
+    </action>
+    <action id="com.mockhelper.action.MockMethodStatic" class="com.mockhelper.action.MockMethodStatic" text="com.mockhelper.action.MockMethodStatic"
+      description="Mock static method using Power Mockito.">
+      <keyboard-shortcut first-keystroke="alt O" keymap="$default"/>
+    </action>
+    <action id="com.mockhelper.action.FillParameterValues" class="com.mockhelper.action.FillParameterValues" text="com.mockhelper.action.FillParameterValues"
+      description="Fill parameter values for method or constructor call.">
+      <keyboard-shortcut first-keystroke="alt P" keymap="$default"/>
+    </action>
+    <action id="com.mockhelper.action.ArrangeFields" class="com.mockhelper.action.ArrangeFields" text="com.mockhelper.action.ArrangeFields"
+      description="Arrange fields and update their visibility.">
+      <keyboard-shortcut first-keystroke="alt L" keymap="$default"/>
+    </action>
+  </actions>
+</idea-plugin>
