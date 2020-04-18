@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 public class ParamUtil {
 
     private static final String INSTANCE_OF = "instance of";
-    private static final String ENHANCER_BY_MOCKITO = "EnhancerByMockito";
+    private static final String MOCKITO = "Mockito";
 
     private ParamUtil() {
         throw new AssertionError("Utility class should not be instantiated.");
@@ -105,7 +105,7 @@ public class ParamUtil {
         for (String param : params) {
             if (!"".equals(param)) {
                 String paramValue = DebugUtil.evaluateExpression(session, param);
-                if (paramValue.startsWith(INSTANCE_OF) && !paramValue.contains(ENHANCER_BY_MOCKITO)) {
+                if (paramValue.startsWith(INSTANCE_OF) && !paramValue.contains(MOCKITO)) {
                     notMockedObject = true;
                     break;
                 }
@@ -118,12 +118,12 @@ public class ParamUtil {
             String paramValue, PsiType paramType) {
         if (needAddL(paramValue, paramType)) {
             paramValue += "L";
-        } else if (paramValue.contains(ENHANCER_BY_MOCKITO)) {
+        } else if (paramValue.contains(MOCKITO)) {
             paramValue = getTestField(testPsiFile, project, paramValue, paramType);
         } else if (notMockedObject(notMockedObject, paramValue)) {
             paramValue = "eq(" + paramValue + ")";
         } else if (Objects.requireNonNull(paramValue).startsWith(INSTANCE_OF) && !paramValue
-                .contains(ENHANCER_BY_MOCKITO)) {
+                .contains(MOCKITO)) {
             paramValue = "any(" + paramType.getCanonicalText() + ".class)";
         }
         return paramValue;
@@ -154,7 +154,7 @@ public class ParamUtil {
     private static boolean notMockedObject(boolean notMockedObject, String paramValue) {
         return notMockedObject
                 && !(Objects.requireNonNull(paramValue).startsWith(INSTANCE_OF) && !paramValue
-                .contains(ENHANCER_BY_MOCKITO));
+                .contains(MOCKITO));
     }
 
     @NotNull
